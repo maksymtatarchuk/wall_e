@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const dbDir = path.join(__dirname.split('/modules')[0], 'data')
+const dbDir = path.join(__dirname.split('\modules')[0], 'data')
 
 
 class dbActions {
@@ -36,7 +36,6 @@ class dbActions {
     }
 
     async write(data) {
-        console.log('write(data) ', data)
         let sourceDB = await this.read(data)
         sourceDB.messages.push({
             date: data.date,
@@ -46,6 +45,9 @@ class dbActions {
         })
 
         fs.writeFileSync(path.join(dbDir, data.from.username + '.json'), JSON.stringify(sourceDB))
+    }
+
+    async getChatHistory() {
     }
 }
 module.exports = dbActions
